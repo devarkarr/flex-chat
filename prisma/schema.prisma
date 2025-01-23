@@ -15,15 +15,15 @@ datasource db {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String
+  username      String    @unique
   email         String    @unique
   emailVerified DateTime?
-  image         String?
+  password      String
+  avatar        String?
   accounts      Account[]
-  // Optional for WebAuthn support
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Account {
@@ -47,4 +47,11 @@ model Account {
   @@id([provider, providerAccountId])
 }
 
+model VerificationToken {
+  id String @id @default(cuid())
+  email String
+  token String
+  expires DateTime
 
+  @@unique([email, token])
+}

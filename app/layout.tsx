@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Anton, Rubik } from "next/font/google";
 import "./globals.css";
 
 const rubik = Rubik({
   variable: "--font-rubik",
   subsets: ["latin"],
+});
+
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -19,7 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} antialiased`}>{children}</body>
+      <body
+        className={`${rubik.variable} ${anton.variable} bg-[#F1F5F9] antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

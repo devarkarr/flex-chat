@@ -20,6 +20,7 @@
     "next-auth": "5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -47,6 +48,8 @@
       "eslint --max-warnings=0",
       "prettier --write"
     ],
-    "**/*.{html,json,css,scss,md,mdx}": ["prettier -w"]
+    "**/*.{html,json,css,scss,md,mdx}": [
+      "prettier -w"
+    ]
   }
 }
