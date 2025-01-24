@@ -36,5 +36,5 @@ export const generateVerificationToken = async (email: string) => {
     },
   });
 
-  return newToken;
+  return newToken.token;
 };

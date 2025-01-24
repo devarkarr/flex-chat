@@ -3,4 +3,5 @@
 
 
 # Commands to run before committing
+pnpm build
 pnpm run lint
