@@ -4,7 +4,7 @@ import { registerSchema } from "@/schema/auth.schema";
 import { z } from "zod";
 import { getUserByEmail } from "./services/user.service";
 import { prisma } from "@/config/db.config";
-import { hashSync } from "bcrypt";
+import bcrypt from "bcryptjs";
 import { generateVerificationToken } from "./services/verification-token.service";
 import { sendVerificationMail } from "@/config/mail.config";
 
@@ -29,7 +29,7 @@ export const RegisterAction = async (
   const user = await getUserByEmail(email);
   if (user) return { error: "Email already exists" };
 
-  const hash_password = hashSync(password, 10);
+  const hash_password = await bcrypt.hash(password, 10);
   const username = name.toLowerCase();
   try {
     const newUser = await prisma.user.create({

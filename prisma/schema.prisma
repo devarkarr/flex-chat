@@ -20,7 +20,7 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   password      String
-  avatar        String   @default("https://gravatar.com/avatar/?d=robohash")
+  avatar        String    @default("https://gravatar.com/avatar/?d=robohash")
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -48,9 +48,18 @@ model Account {
 }
 
 model VerificationToken {
-  id String @id @default(cuid())
-  email String
-  token String
+  id      String   @id @default(cuid())
+  email   String
+  token   String
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model ResetPasswordToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String
   expires DateTime
 
   @@unique([email, token])

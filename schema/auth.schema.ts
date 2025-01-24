@@ -26,3 +26,10 @@ export const registerSchema = loginSchema
     message: "Passwords must match.",
     path: ["confirmPassword"],
   });
+
+/**
+ * forgot password validation
+ */
+export const forgotPasswordSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address." }),
+});
