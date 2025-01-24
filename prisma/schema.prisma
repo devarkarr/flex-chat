@@ -20,7 +20,7 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   password      String
-  avatar        String?
+  avatar        String   @default("https://gravatar.com/avatar/?d=robohash")
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt

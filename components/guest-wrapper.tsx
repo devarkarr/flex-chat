@@ -14,7 +14,7 @@ const GuestWrapper = ({ children }: Props) => {
         </div>
       </nav>
       {/* title */}
-      <div className="h-[80vh] w-full flex max-sm:flex-col items-center gap-7 sm:justify-between">
+      <div className="h-[80vh] w-full flex max-sm:flex-col items-center gap-7 sm:justify-center">
         <div className="sm:w-[50%]   font-sans w-full">
           <div className="space-y-1">
             <h4 className="text-lg sm:text-2xl font-semibold">

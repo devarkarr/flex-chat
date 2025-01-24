@@ -1,9 +1,8 @@
 import AuthWrapper from "@/components/auth/auth-wrapper";
-import LoginForm from "@/components/auth/login-form";
 import GuestWrapper from "@/components/guest-wrapper";
 import React from "react";
 
-const LoginPage = () => {
+const EmailVerificationPage = () => {
   return (
     <GuestWrapper>
       <AuthWrapper
@@ -12,10 +11,10 @@ const LoginPage = () => {
         bottomLabel="Don't have an account?"
         bottomTitle="Sign up"
       >
-        <LoginForm />
+        <h1>email verification</h1>
       </AuthWrapper>
     </GuestWrapper>
   );
 };
 
-export default LoginPage;
+export default EmailVerificationPage;

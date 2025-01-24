@@ -18,7 +18,7 @@ const AuthWrapper = ({
   bottomTitle,
 }: Props) => {
   return (
-    <div className="w-full sm:w-[45%] bg-white shadow-sm p-7 rounded-xl ">
+    <div className="w-full sm:w-[35%] bg-white shadow-sm p-7 rounded-xl ">
       <div className="text-center space-y-2">
         <div className="text-3xl">🔐</div>
         <h1 className="text-lg">

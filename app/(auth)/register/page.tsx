@@ -1,4 +1,5 @@
 import AuthWrapper from "@/components/auth/auth-wrapper";
+import RegisterForm from "@/components/auth/register-form";
 import GuestWrapper from "@/components/guest-wrapper";
 import React from "react";
 
@@ -11,7 +12,7 @@ const RegisterPage = () => {
         bottomLabel="Already have an account?"
         bottomTitle="Sign in"
       >
-        <h1 className=" text-primary">RegisterPage</h1>
+        <RegisterForm />
       </AuthWrapper>
     </GuestWrapper>
   );
