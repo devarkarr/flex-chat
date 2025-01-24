@@ -45,6 +45,7 @@ const LoginForm = () => {
       if (response.success) {
         setSuccess(response.success);
         setPending(false);
+        form.reset();
         return;
       }
     });

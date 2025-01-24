@@ -8,9 +8,10 @@ const resend = new Resend(process.env.NEXT_RESENT_API);
  * @param email
  */
 export const sendVerificationMail = async (email: string, token: string) => {
+  console.log(email);
   const response = await resend.emails.send({
     from: `${process.env.NEXT_MAIL_NAME} <${process.env.NEXT_MAIL_ADDRESS}>`,
-    to: email,
+    to: "arkarlin486@gmail.com",
     subject: `Email Verification `,
     html: `<p>it works! <a href="${process.env.NEXT_PUBLIC_URL}/email-verification?token=${token}">click</a></p>`,
   });

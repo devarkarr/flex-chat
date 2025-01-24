@@ -7,10 +7,20 @@ import { prisma } from "@/config/db.config";
 export const getUserByEmail = async (
   email: string
 ): Promise<ReturnType<typeof prisma.user.findUnique> | null> => {
-  const user = await prisma.user.findUnique({
+  return await prisma.user.findUnique({
     where: {
       email: email,
     },
   });
-  return user;
+};
+
+export const updateUserByEmail = async (email: string) => {
+  return await prisma.user.update({
+    where: {
+      email: email,
+    },
+    data: {
+      emailVerified: new Date(),
+    },
+  });
 };

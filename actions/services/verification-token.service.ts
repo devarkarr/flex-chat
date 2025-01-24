@@ -11,6 +11,16 @@ export const getVerificationTokenByEmail = async (email: string) => {
   return verificationToken;
 };
 
+export const getVerificationTokenByToken = async (token: string) => {
+  const verificationToken = await prisma.verificationToken.findFirst({
+    where: {
+      token: token,
+    },
+  });
+
+  return verificationToken;
+};
+
 export const deleteVerificationTokenById = async (id: string) => {
   await prisma.verificationToken.delete({
     where: {
@@ -18,6 +28,7 @@ export const deleteVerificationTokenById = async (id: string) => {
     },
   });
 };
+
 
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();

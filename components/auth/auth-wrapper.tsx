@@ -8,6 +8,7 @@ type Props = {
   bottomLabel: string;
   bottomHref: string;
   bottomTitle: string;
+  social?: boolean;
 };
 
 const AuthWrapper = ({
@@ -16,6 +17,7 @@ const AuthWrapper = ({
   bottomHref,
   bottomLabel,
   bottomTitle,
+  social = false,
 }: Props) => {
   return (
     <div className="w-full sm:w-[35%] bg-white shadow-sm p-7 rounded-xl ">
@@ -29,13 +31,18 @@ const AuthWrapper = ({
         </h1>
       </div>
       <div className="my-5">{children}</div>
-      <div className=" relative">
-        <div className="w-full h-[0.5px] bg-gray-500"></div>
-        <p className="text-xs absolute top-[-8px] bg-white px-1 left-[48%]">
-          Or
-        </p>
-      </div>
-      <Social />
+
+      {social && (
+        <>
+          <div className=" relative">
+            <div className="w-full h-[0.5px] bg-gray-500"></div>
+            <p className="text-xs absolute top-[-8px] bg-white px-1 left-[48%]">
+              Or
+            </p>
+          </div>
+          <Social />
+        </>
+      )}
       <div>
         <p className="text-sm text-center">
           {bottomLabel}

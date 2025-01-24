@@ -11,6 +11,7 @@ const RegisterPage = () => {
         bottomHref="/login"
         bottomLabel="Already have an account?"
         bottomTitle="Sign in"
+        social
       >
         <RegisterForm />
       </AuthWrapper>
