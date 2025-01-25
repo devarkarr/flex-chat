@@ -8,6 +8,7 @@ import {
 } from "./routes";
 //@ts-ignore
 import { NextAuthRequest } from "next-auth/lib";
+import { NextResponse } from "next/server";
 const { auth } = NextAuth(authConfig);
 //@ts-ignore
 
@@ -22,18 +23,18 @@ export default auth((req: NextAuthRequest) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   if (nextUrl.pathname === "/")
-    return Response.redirect(new URL("/login", nextUrl));
+    return NextResponse.redirect(new URL("/login", nextUrl));
 
-  if (isApiAuthRoute) return Response.redirect(new URL("/login", nextUrl));
+  if (isApiAuthRoute) return NextResponse.redirect(new URL("/login", nextUrl));
 
   if (isAuthRoute) {
     if (isLogin)
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     return null;
   }
 
   if (!isLogin && !isPublicRoute) {
-    return Response.redirect(new URL("/login", nextUrl));
+    return NextResponse.redirect(new URL("/login", nextUrl));
   }
 
   return null;

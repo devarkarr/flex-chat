@@ -48,11 +48,8 @@ export const LoginAction = async (
         error: error.message,
       };
     }
-    return {
-      error: "Something went wrong!",
-    };
   }
   return {
-    success: "login",
+    success: "login successful",
   };
 };

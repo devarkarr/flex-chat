@@ -21,7 +21,15 @@ export const getResetPasswordTokenByEmail = async (email: string) => {
   });
 };
 
-export const deleteResetPasswordTokenByEmail = async (id: string) => {
+export const getResetPasswordTokenByToken = async (token: string) => {
+  return await prisma.resetPasswordToken.findFirst({
+    where: {
+      token: token,
+    },
+  });
+};
+
+export const deleteResetPasswordTokenById = async (id: string) => {
   return await prisma.resetPasswordToken.delete({
     where: {
       id: id,
@@ -32,7 +40,7 @@ export const deleteResetPasswordTokenByEmail = async (id: string) => {
 export const generateResetPasswordToken = async (email: string) => {
   const existToken = await getResetPasswordTokenByEmail(email);
   if (existToken) {
-    await deleteResetPasswordTokenByEmail(existToken.id);
+    await deleteResetPasswordTokenById(existToken.id);
   }
 
   const token = uuidv4();

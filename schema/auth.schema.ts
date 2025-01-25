@@ -33,3 +33,21 @@ export const registerSchema = loginSchema
 export const forgotPasswordSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
 });
+
+/**
+ * new password validation
+ */
+export const newPasswordSchema = z
+  .object({
+    token: z.string().nullish(),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long." }),
+    confirmPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long." }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match.",
+    path: ["confirmPassword"],
+  });

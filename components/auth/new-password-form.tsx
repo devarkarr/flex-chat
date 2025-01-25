@@ -12,26 +12,26 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/schema/auth.schema";
+import { newPasswordSchema } from "@/schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { LoginAction } from "@/actions/login.action";
 import AuthError from "./auth-error";
 import AuthSuccess from "./auth-success.";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { newPasswordAction } from "@/actions/new-password.action";
+import { useSearchParams } from "next/navigation";
 
-const LoginForm = () => {
-  const route = useRouter();
+const NewPasswordForm = () => {
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<string | null>(null);
   const [isPending, setPending] = React.useState<boolean>(false);
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  const form = useForm<z.infer<typeof newPasswordSchema>>({
+    resolver: zodResolver(newPasswordSchema),
     defaultValues: {
-      email: "",
+      token: token,
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -40,7 +40,7 @@ const LoginForm = () => {
     setSuccess("");
     setPending(true);
     startTransition(async () => {
-      const response = await LoginAction(form.getValues());
+      const response = await newPasswordAction(form.getValues());
       if (response.error) {
         setError(response.error);
         setPending(false);
@@ -49,7 +49,6 @@ const LoginForm = () => {
       if (response.success) {
         setSuccess(response.success);
         setPending(false);
-        route.push(DEFAULT_LOGIN_REDIRECT);
         form.reset();
         return;
       }
@@ -63,19 +62,6 @@ const LoginForm = () => {
         <AuthSuccess message={success} />
         <FormField
           control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="example@.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -87,18 +73,26 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <div>
-          <Link href="/forgot-password">
-            <p className="text-xs">Forgot password?</p>
-          </Link>
-        </div>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="********" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button type="submit" disabled={isPending} className="w-full">
-          Sign in
+          new password
         </Button>
       </form>
     </Form>
   );
 };
 
-export default LoginForm;
+export default NewPasswordForm;
