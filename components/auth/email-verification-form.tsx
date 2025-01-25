@@ -28,7 +28,7 @@ const EmailVerificationForm = () => {
 
   useEffect(() => {
     handler();
-  }, [token]);
+  }, [handler]);
   return (
     <div className="w-full flex justify-center py-2">
       {isPending ? (
